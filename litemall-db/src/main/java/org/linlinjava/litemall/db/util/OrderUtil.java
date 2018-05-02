@@ -64,6 +64,9 @@ public class OrderUtil {
         if (status == 402) {
             return "已收货(系统)";
         }
+        if (status == 501) {
+            return "已评价";
+        }
 
         Assert.state(false, "orderStatus不支持");
         return "";
@@ -102,6 +105,11 @@ public class OrderUtil {
             // 如果订单已经支付，且已经收货，则可完成交易、评论和再次购买
             handleOption.setDelete(true);
             handleOption.setComment(true);
+            handleOption.setRebuy(true);
+        }
+        else if (status ==  501) {
+            // 如果订单已经支付，且已经收货，则可完成交易、评论和再次购买
+            handleOption.setDelete(true);
             handleOption.setRebuy(true);
         }
         else {

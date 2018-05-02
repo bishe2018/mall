@@ -1,9 +1,13 @@
 package org.linlinjava.litemall.wx.web;
 
 import org.linlinjava.litemall.db.domain.LitemallComment;
+import org.linlinjava.litemall.db.domain.LitemallOrder;
 import org.linlinjava.litemall.db.service.LitemallCommentService;
 import org.linlinjava.litemall.db.service.LitemallCouponService;
+import org.linlinjava.litemall.db.service.LitemallOrderService;
 import org.linlinjava.litemall.db.service.LitemallUserService;
+import org.linlinjava.litemall.db.util.OrderHandleOption;
+import org.linlinjava.litemall.db.util.OrderUtil;
 import org.linlinjava.litemall.db.util.ResponseUtil;
 import org.linlinjava.litemall.wx.annotation.LoginUser;
 import org.linlinjava.litemall.wx.service.UserInfoService;
@@ -31,6 +35,8 @@ public class WxCommentController {
     private LitemallCouponService couponService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private LitemallOrderService orderService;
 
     /**
      * 发表评论
@@ -43,7 +49,16 @@ public class WxCommentController {
         if(comment == null){
             return ResponseUtil.fail402();
         }
-
+        LitemallOrder order = orderService.findById(comment.getOrderId());
+        if(order == null){
+            return ResponseUtil.fail403();
+        }
+        // OrderHandleOption handleOption = OrderUtil.build(order);
+        // if(!handleOption.isCancel()){
+        //     return ResponseUtil.fail(403, "订单不能取消");
+        // }
+        order.setOrderStatus((short)501);
+        orderService.update(order);
         comment.setAddTime(LocalDate.now());
         comment.setUserId(userId);
         commentService.save(comment);
