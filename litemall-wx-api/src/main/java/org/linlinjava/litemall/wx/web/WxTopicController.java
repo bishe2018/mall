@@ -3,6 +3,7 @@ package org.linlinjava.litemall.wx.web;
 import org.linlinjava.litemall.db.domain.LitemallTopic;
 import org.linlinjava.litemall.db.service.LitemallTopicService;
 import org.linlinjava.litemall.db.util.ResponseUtil;
+import org.linlinjava.litemall.wx.annotation.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class WxTopicController {
      * 专题详情
      */
     @RequestMapping("detail")
-    public Object detail(Integer id) {
+    public Object detail( Integer id) {
         if(id == null){
             return ResponseUtil.fail402();
         }

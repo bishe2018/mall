@@ -2,7 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.linlinjava</groupId>
+    <!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如org.linlinjava会将该项目打成的jar包放本地路径：/org/linlinjava -->
     <artifactId>litemall-db</artifactId>
+    <!-- 本项目的唯一ID-->
     <version>0.1.0</version>
     <packaging>jar</packaging>
 

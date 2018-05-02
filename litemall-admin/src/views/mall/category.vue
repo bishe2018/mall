@@ -23,7 +23,7 @@
             </el-form-item>
             <el-form-item label="首页页面类目横幅图片">
        				<img :src="props.row.bannerUrl">
-            </el-form-item>            
+            </el-form-item>
             <el-form-item label="类目页标题">
               <span>{{ props.row.frontName }}</span>
             </el-form-item>
@@ -43,24 +43,23 @@
       <el-table-column align="center" min-width="100px" label="名称" prop="name">
       </el-table-column>
 
-      <el-table-column align="center" min-width="100px" label="关键字" prop="keyword">
-      </el-table-column>
-      
+
+
       <el-table-column align="center" min-width="100px" label="级别" prop="level"
         :filters="[{ text: '一级类目', value: 'L1' }, { text: '二级类目', value: 'L2' }]" :filter-method="filterLevel">
         <template slot-scope="scope">
           <el-tag :type="scope.row.level === 'L1' ? 'primary' : 'info' ">{{scope.row.level === 'L1' ? '一级类目' : '二级类目'}}</el-tag>
         </template>
-      </el-table-column>   
+      </el-table-column>
 
       <el-table-column align="center" min-width="100px" label="父类目ID" prop="parentId">
-      </el-table-column> 
+      </el-table-column>
 
       <el-table-column align="center" min-width="100px" label="是否显示" prop="isShow">
         <template slot-scope="scope">
           <el-tag :type="scope.row.isShow ? 'success' : 'error' ">{{scope.row.isShow ? '可显示' : '不显示'}}</el-tag>
         </template>
-      </el-table-column> 
+      </el-table-column>
 
       <el-table-column align="center" label="操作" width="250" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -83,9 +82,7 @@
         <el-form-item label="类目名称" prop="name">
           <el-input v-model="dataForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="类目关键字" prop="keyword">
-          <el-input v-model="dataForm.keyword"></el-input>
-        </el-form-item>
+
         <el-form-item label="类目级别" prop="level">
           <el-select v-model="dataForm.level" placeholder="请选择">
             <el-option label="一级类目" value="L1">
@@ -102,13 +99,13 @@
         </el-form-item>
         <el-form-item label="图标" prop="iconUrl">
           <el-input v-model="dataForm.iconUrl"></el-input>
-          <el-upload action="http://localhost:8080/storage/create" :show-file-list="false" :on-success="handleIconUrl">
+          <el-upload action="http://localhost:8081/storage/storage/create" :show-file-list="false" :on-success="handleIconUrl">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
         </el-form-item>
         <el-form-item label="首页横幅" prop="bannerUrl">
           <el-input v-model="dataForm.bannerUrl"></el-input>
-          <el-upload action="http://localhost:8080/storage/create" :show-file-list="false" :on-success="handleBannerUrl">
+          <el-upload action="http://localhost:8081/storage/storage/create" :show-file-list="false" :on-success="handleBannerUrl">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
         </el-form-item>
@@ -120,10 +117,10 @@
         </el-form-item>
         <el-form-item label="类目页横幅" prop="wapBannerUrl">
           <el-input v-model="dataForm.wapBannerUrl"></el-input>
-          <el-upload action="http://localhost:8080/storage/create" :show-file-list="false" :on-success="handleWapBannerUrl">
+          <el-upload action="http://localhost:8081/storage/storage/create" :show-file-list="false" :on-success="handleWapBannerUrl">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
-        </el-form-item>        
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -191,8 +188,7 @@ export default {
         create: '创建'
       },
       rules: {
-        name: [{ required: true, message: '类目名称不能为空', trigger: 'blur' }],
-        keyword: [{ required: true, message: '类目关键字不能为空', trigger: 'blur' }]
+        name: [{ required: true, message: '类目名称不能为空', trigger: 'blur' }]
       },
       downloadLoading: false
     }

@@ -74,7 +74,7 @@ public class WxCommentController {
     public Object list(Byte typeId, Integer valueId, Integer showType,
                        @RequestParam(value = "page", defaultValue = "0") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        if(typeId == null || valueId == null || showType == null){
+        if(typeId == null || valueId == null){
             return ResponseUtil.fail401();
         }
 

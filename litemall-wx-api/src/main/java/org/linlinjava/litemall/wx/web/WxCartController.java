@@ -306,7 +306,7 @@ public class WxCartController {
             return ResponseUtil.fail402();
         }
 
-        cartService.delete(productIds, 1);
+        cartService.delete(productIds, userId);
         return index(userId);
     }
 

@@ -19,29 +19,32 @@ Page({
     });
 
     util.request(api.TopicDetail, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.errno == 0) {
 
         that.setData({
           topic: res.data,
         });
 
         WxParse.wxParse('topicDetail', 'html', res.data.content, that);
+          util.request(api.TopicRelated, { id: that.data.id}).then(function (res) {
+              if (res.errno == 0) {
+
+                  that.setData({
+                      topicList: res.data
+                  });
+                  // 页面显示
+                  this.getCommentList();
+              }
+          });
       }
     });
 
-    util.request(api.TopicRelated, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
 
-        that.setData({
-          topicList: res.data
-        });
-      }
-    });
   },
   getCommentList(){
     let that = this;
-    util.request(api.CommentList, { valueId: that.data.id, typeId: 1, size: 5 }).then(function (res) {
-      if (res.errno === 0) {
+    util.request(api.CommentList, { valueId: that.data.id, typeId: 1, size: 5,showType:1 }).then(function (res) {
+      if (res.errno == 0) {
 
         that.setData({
           commentList: res.data.data,
@@ -59,8 +62,7 @@ Page({
 
   },
   onShow: function () {
-    // 页面显示
-    this.getCommentList();
+
   },
   onHide: function () {
     // 页面隐藏

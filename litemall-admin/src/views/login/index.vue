@@ -58,15 +58,15 @@ export default {
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('管理员密码长度应大于6'))
+        callback(new Error('管理员密码长度应大于等于6'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin123',
-        password: 'admin123'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

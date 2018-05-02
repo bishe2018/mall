@@ -23,10 +23,10 @@
             </el-form-item>
             <el-form-item label="宣传画廊">
               <span>{{ props.row.gallery }}</span>
-            </el-form-item>            
+            </el-form-item>
             <el-form-item label="商品介绍">
               <span>{{ props.row.goodsBrief }}</span>
-            </el-form-item> 
+            </el-form-item>
             <el-form-item label="商品详细介绍">
               <span>{{ props.row.goodsDesc }}</span>
             </el-form-item>
@@ -41,17 +41,17 @@
             </el-form-item>
             <el-form-item label="类目ID">
               <span>{{ props.row.categoryId }}</span>
-            </el-form-item>      
+            </el-form-item>
             <el-form-item label="品牌商ID">
               <span>{{ props.row.brandId }}</span>
-            </el-form-item>                                   
-          </el-form>          
+            </el-form-item>
+          </el-form>
         </template>
       </el-table-column>
 
       <el-table-column align="center" width="100px" label="商品ID" prop="id" sortable>
       </el-table-column>
-      
+
       <el-table-column align="center" min-width="100px" label="商品编号" prop="goodsSn">
       </el-table-column>
 
@@ -68,19 +68,19 @@
         <template slot-scope="scope">
           <el-tag :type="scope.row.isNew ? 'success' : 'error' ">{{scope.row.isNew ? '新品' : '非新品'}}</el-tag>
         </template>
-      </el-table-column> 
+      </el-table-column>
 
       <el-table-column align="center" min-width="100px" label="是否热品" prop="isHot">
         <template slot-scope="scope">
           <el-tag :type="scope.row.isHot ? 'success' : 'error' ">{{scope.row.isHot ? '热品' : '非热品'}}</el-tag>
         </template>
-      </el-table-column> 
+      </el-table-column>
 
       <el-table-column align="center" min-width="100px" label="是否在售" prop="isOnSale">
         <template slot-scope="scope">
           <el-tag :type="scope.row.isOnSale ? 'success' : 'error' ">{{scope.row.isOnSale ? '在售' : '未售'}}</el-tag>
         </template>
-      </el-table-column>             
+      </el-table-column>
 
       <el-table-column align="center" label="操作" width="250" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -109,13 +109,13 @@
         </el-form-item>
         <el-form-item label="商品名称" prop="name">
           <el-input v-model="dataForm.name"></el-input>
-        </el-form-item>        
+        </el-form-item>
         <el-form-item label="专柜价格" prop="counterPrice">
           <el-input v-model="dataForm.counterPrice"></el-input>
         </el-form-item>
         <el-form-item label="当前价格" prop="retailPrice">
           <el-input v-model="dataForm.retailPrice"></el-input>
-        </el-form-item>                
+        </el-form-item>
         <el-form-item label="是否新品" prop="isNew">
           <el-select v-model="dataForm.isNew" placeholder="请选择">
             <el-option label="新品" :value="true">
@@ -131,7 +131,7 @@
             <el-option label="非热品" :value="false">
             </el-option>
           </el-select>
-        </el-form-item>                
+        </el-form-item>
         <el-form-item label="是否在售" prop="isOnSale">
           <el-select v-model="dataForm.isOnSale" placeholder="请选择">
             <el-option label="在售" :value="true">
@@ -140,42 +140,50 @@
             </el-option>
           </el-select>
         </el-form-item>
-            
-        <el-form-item label="首页主图">
-          <el-input v-model="dataForm.listPicUrl"></el-input>
+
+        <el-form-item label="首页主图" prop="listPicUrl">
+            <el-input v-model="dataForm.listPicUrl"></el-input>
+                <el-upload action="#" list-type="picture" :show-file-list="false" :limit="1" :http-request="uploadListPicUrl">
+                <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
         </el-form-item>
-        
+
+
         <el-form-item label="宣传画廊">
-          <el-input v-model="dataForm.gallery"></el-input>
-        </el-form-item>            
-        
+            <el-input v-model="dataForm.gallery"></el-input>
+        </el-form-item>
+
         <el-form-item label="商品介绍">
           <el-input v-model="dataForm.goodsBrief"></el-input>
-        </el-form-item> 
-            
+        </el-form-item>
+
         <el-form-item label="商品详细介绍">
           <el-input v-model="dataForm.goodsDesc"></el-input>
         </el-form-item>
-        
-        <el-form-item label="商品主图">
-          <el-input v-model="dataForm.primaryPicUrl"></el-input>
+
+
+        <el-form-item label="商品主图" prop="primaryPicUrl">
+            <el-input v-model="dataForm.primaryPicUrl"></el-input>
+                 <el-upload action="#" list-type="picture" :show-file-list="false" :limit="1" :http-request="uploadPrimaryPicUrl">
+                 <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
         </el-form-item>
-            
+
         <el-form-item label="商品单位">
           <el-input v-model="dataForm.goodsUnit"></el-input>
         </el-form-item>
-            
+
         <el-form-item label="关键字">
           <el-input v-model="dataForm.keyword"></el-input>
         </el-form-item>
-            
+
         <el-form-item label="类目ID">
           <el-input v-model="dataForm.categoryId"></el-input>
-        </el-form-item>      
-        
+        </el-form-item>
+
         <el-form-item label="品牌商ID">
-          <el-input v-model="dataForm.brandId"></el-input>              
-        </el-form-item>          
+          <el-input v-model="dataForm.brandId"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -204,6 +212,7 @@
 <script>
 import { listGoods, createGoods, updateGoods, deleteGoods } from '@/api/goods'
 import waves from '@/directive/waves' // 水波纹指令
+import { createStorage } from '@/api/storage'
 import BackToTop from '@/components/BackToTop'
 
 export default {
@@ -298,12 +307,32 @@ export default {
         keywords: undefined,
         gallery: undefined,
         categoryId: undefined,
-        brandId: undefined
+        brandId: undefined,
+        listPicUrl: undefined
       }
     },
     filterLevel(value, row) {
       return row.level === value
     },
+     uploadListPicUrl(item) {
+          const formData = new FormData()
+          formData.append('file', item.file)
+          createStorage(formData).then(res => {
+            this.dataForm.listPicUrl = res.data.data.url
+          }).catch(() => {
+            this.$message.error('上传失败，请重新上传')
+          })
+        },
+        uploadPrimaryPicUrl(item) {
+                  const formData = new FormData()
+                  formData.append('file', item.file)
+                  createStorage(formData).then(res => {
+                    this.dataForm.primaryPicUrl = res.data.data.url
+                  }).catch(() => {
+                    this.$message.error('上传失败，请重新上传')
+                  })
+                },
+
     handleCreate() {
       this.resetForm()
       this.dialogStatus = 'create'

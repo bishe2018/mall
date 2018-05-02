@@ -19,7 +19,7 @@
       </el-table-column>
 
       <el-table-column align="center" min-width="100px" label="管理员头像" prop="avatar">
-      </el-table-column>        
+      </el-table-column>
 
       <el-table-column align="center" label="操作" width="250" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -47,9 +47,9 @@
         </el-form-item>
         <el-form-item label="确认密码" prop="checkPassword">
           <el-input type="password" v-model="dataForm.checkPassword" auto-complete="off"></el-input>
-        </el-form-item>                
+        </el-form-item>
         <el-form-item label="管理员头像" prop="avatar">
-          <el-input v-model="dataForm.avatar"></el-input>          
+          <el-input v-model="dataForm.avatar"></el-input>
           <el-upload action="#" list-type="picture" :show-file-list="false" :limit="1" :http-request="uploadAvatar">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
@@ -79,6 +79,8 @@ export default {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
+      } else if (value.length < 6) {
+        callback(new Error('管理员密码长度应大于等于6'))
       } else {
         if (this.dataForm.checkPassword !== '') {
           this.$refs.dataForm.validateField('checkPassword')
