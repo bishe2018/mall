@@ -136,7 +136,8 @@ Page({
       content: that.data.content,
       star: that.data.star,
       hasPicture: that.data.hasPicture,
-      picUrls: that.data.picUrls
+      picUrls: that.data.picUrls,
+      orderId: that.data.orderId
     }, 'POST').then(function (res) {
       if (res.errno === 0) {
         wx.showToast({
